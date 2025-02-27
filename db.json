@@ -1,0 +1,49 @@
+{
+  "tasks": [
+    {
+      "id": "task-1",
+      "text": "Grocery shopping for the week",
+      "done": false
+    },
+    {
+      "id": "task-2",
+      "text": "Book a doctor appointment for check-up",
+      "done": false
+    },
+    {
+      "id": "task-3",
+      "text": "Pay the monthly electricity bill",
+      "done": false
+    },
+    {
+      "id": "task-4",
+      "text": "Submit the project report to manager",
+      "done": true
+    },
+    {
+      "id": "task-5",
+      "text": "Review the code changes from the team",
+      "done": true
+    },
+    {
+      "id": "task-6",
+      "text": "Attend the weekly team meeting",
+      "done": true
+    },
+    {
+      "id": "task-7",
+      "text": "Clean the kitchen after dinner",
+      "done": false
+    },
+    {
+      "id": "task-8",
+      "text": "Walk the dog in the park",
+      "done": true
+    },
+    {
+      "id": "task-9",
+      "text": "Call mom to wish her happy birthday",
+      "done": false
+    }
+  ]
+}
