@@ -17,7 +17,7 @@ export type TodoDto = {
   done: boolean;
 };
 
-export const TodoListApi = {
+export const todoListApi = {
   getTodoListQueryOptions: ({ page }: { page: number }) => {
     return queryOptions({
       queryKey: ["tasks, list", { page }],
