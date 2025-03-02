@@ -1,24 +1,29 @@
-import { keepPreviousData, useQuery } from "@tanstack/react-query";
+import { useInfiniteQuery } from "@tanstack/react-query";
 import { TodoListApi } from "./api";
-import { useState } from "react";
+import { useCallback, useRef, useState } from "react";
 
 export const TodoList = () => {
-  const [page, setPage] = useState(1);
   const [enabled, setEnabled] = useState(true);
 
   const {
     data: toDoItems,
     error,
-    isPending,
     isLoading,
-    status,
+    fetchNextPage,
+    isFetchingNextPage,
+    hasNextPage,
     isFetching,
-    fetchStatus,
-  } = useQuery({
-    queryKey: ["tasks, list", { page }],
-    queryFn: (meta) => TodoListApi.getTodoList({ page }, meta),
-    placeholderData: keepPreviousData, // for temporary
+  } = useInfiniteQuery({
+    queryKey: ["tasks, list"],
+    queryFn: (meta) => TodoListApi.getTodoList({ page: meta.pageParam }, meta),
     enabled: enabled,
+    initialPageParam: 1,
+    getNextPageParam: (result) => result.next,
+    select: (result) => result.pages.flatMap((page) => page.data),
+  });
+
+  const cursorRef = useIntersection(() => {
+    fetchNextPage();
   });
 
   if (isLoading) return <div>Loading...</div>;
@@ -36,7 +41,7 @@ export const TodoList = () => {
         <button onClick={() => setEnabled((e) => !e)} className="">
           {enabled ? "disable" : "enable"}{" "}
         </button>
-        {toDoItems?.data.map((todo) => (
+        {toDoItems?.map((todo) => (
           <div
             key={todo.id}
             className="border border-slate-400 rounded p-3 w-1/3 text-center"
@@ -44,26 +49,32 @@ export const TodoList = () => {
             {todo.text}
           </div>
         ))}
-
-        <div className="flex gap-6 justify-center w-full items-center mt-4">
-          <button
-            className="p-3 rounded border border-slate-400"
-            onClick={() => {
-              setPage((p) => Math.max(p - 1, 1));
-            }}
-          >
-            prev
-          </button>
-          <button
-            className="p-3 rounded border border-slate-400"
-            onClick={() => {
-              setPage((p) => Math.min(p + 1, toDoItems?.pages || 1));
-            }}
-          >
-            next
-          </button>
-        </div>
+      </div>
+      <div className="flex gap-2 mt-4" ref={cursorRef}>
+        {!hasNextPage && <div>No data available</div>}
+        {isFetchingNextPage && <div>Loading...</div>}
       </div>
     </div>
   );
+};
+
+const useIntersection = (onIntersect: () => void) => {
+  const unsubscribe = useRef(() => {});
+  return useCallback((element: HTMLDivElement | null) => {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((intersection) => {
+        if (intersection.isIntersecting) {
+          onIntersect();
+        }
+      });
+    });
+
+    if (element) {
+      observer.observe(element);
+      unsubscribe.current = () => observer.disconnect();
+    } else {
+      unsubscribe.current();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 };
