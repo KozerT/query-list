@@ -44,7 +44,7 @@ export const TodoList = () => {
         {toDoItems?.map((todo) => (
           <div
             key={todo.id}
-            className="border border-slate-400 rounded p-3 w-1/3 text-center"
+            className="border border-slate-400 rounded p-3 md:w-1/2 sm:w-full text-center"
           >
             {todo.text}
           </div>
@@ -60,21 +60,23 @@ export const TodoList = () => {
 
 const useIntersection = (onIntersect: () => void) => {
   const unsubscribe = useRef(() => {});
-  return useCallback((element: HTMLDivElement | null) => {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((intersection) => {
-        if (intersection.isIntersecting) {
-          onIntersect();
-        }
+  return useCallback(
+    (element: HTMLDivElement | null) => {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((intersection) => {
+          if (intersection.isIntersecting) {
+            onIntersect();
+          }
+        });
       });
-    });
 
-    if (element) {
-      observer.observe(element);
-      unsubscribe.current = () => observer.disconnect();
-    } else {
-      unsubscribe.current();
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+      if (element) {
+        observer.observe(element);
+        unsubscribe.current = () => observer.disconnect();
+      } else {
+        unsubscribe.current();
+      }
+    },
+    [onIntersect],
+  );
 };
