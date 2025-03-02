@@ -1,30 +1,7 @@
-import { useInfiniteQuery } from "@tanstack/react-query";
-import { TodoListApi } from "./api";
-import { useCallback, useRef, useState } from "react";
+import { useTodoList } from "./use-todo-list";
 
 export const TodoList = () => {
-  const [enabled, setEnabled] = useState(true);
-
-  const {
-    data: toDoItems,
-    error,
-    isLoading,
-    fetchNextPage,
-    isFetchingNextPage,
-    hasNextPage,
-    isFetching,
-  } = useInfiniteQuery({
-    queryKey: ["tasks, list"],
-    queryFn: (meta) => TodoListApi.getTodoList({ page: meta.pageParam }, meta),
-    enabled: enabled,
-    initialPageParam: 1,
-    getNextPageParam: (result) => result.next,
-    select: (result) => result.pages.flatMap((page) => page.data),
-  });
-
-  const cursorRef = useIntersection(() => {
-    fetchNextPage();
-  });
+  const { cursor, error, isLoading, toDoItems, isFetching } = useTodoList();
 
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>{JSON.stringify(error)}</div>;
@@ -38,9 +15,6 @@ export const TodoList = () => {
           (isFetching ? " opacity-45" : "")
         }
       >
-        <button onClick={() => setEnabled((e) => !e)} className="">
-          {enabled ? "disable" : "enable"}{" "}
-        </button>
         {toDoItems?.map((todo) => (
           <div
             key={todo.id}
@@ -50,33 +24,7 @@ export const TodoList = () => {
           </div>
         ))}
       </div>
-      <div className="flex gap-2 mt-4" ref={cursorRef}>
-        {!hasNextPage && <div>No data available</div>}
-        {isFetchingNextPage && <div>Loading...</div>}
-      </div>
+      {cursor}
     </div>
-  );
-};
-
-const useIntersection = (onIntersect: () => void) => {
-  const unsubscribe = useRef(() => {});
-  return useCallback(
-    (element: HTMLDivElement | null) => {
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach((intersection) => {
-          if (intersection.isIntersecting) {
-            onIntersect();
-          }
-        });
-      });
-
-      if (element) {
-        observer.observe(element);
-        unsubscribe.current = () => observer.disconnect();
-      } else {
-        unsubscribe.current();
-      }
-    },
-    [onIntersect],
   );
 };

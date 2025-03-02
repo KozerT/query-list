@@ -1,4 +1,5 @@
-const BASE_URL = "http://localhost:3000";
+import { infiniteQueryOptions, queryOptions } from "@tanstack/react-query";
+import { jsonApiInstance } from "../../shared/api/api-instance";
 
 export type PaginatedResult<T> = {
   data: T[];
@@ -15,13 +16,34 @@ export type TodoDto = {
   text: string;
   done: boolean;
 };
-export const TodoListApi = {
-  getTodoList: (
-    { page }: { page: number },
-    { signal }: { signal: AbortSignal },
-  ) => {
-    return fetch(`${BASE_URL}/tasks?_page=${page}&_per_page=4`, {
-      signal,
-    }).then((res) => res.json() as Promise<PaginatedResult<TodoDto>>);
+
+export const todoListApi = {
+  getTodoListQueryOptions: ({ page }: { page: number }) => {
+    return queryOptions({
+      queryKey: ["tasks, list", { page }],
+      queryFn: (meta) =>
+        jsonApiInstance<PaginatedResult<TodoDto>>(
+          `/tasks?_page=${page}&_per_page=4`,
+          {
+            signal: meta.signal,
+          },
+        ),
+    });
+  },
+
+  getTodoListInfinityQueryOptions: () => {
+    return infiniteQueryOptions({
+      queryKey: ["tasks, list"],
+      queryFn: (meta) =>
+        jsonApiInstance<PaginatedResult<TodoDto>>(
+          `/tasks?_page=${meta.pageParam}&_per_page=4`,
+          {
+            signal: meta.signal,
+          },
+        ),
+      initialPageParam: 1,
+      getNextPageParam: (result) => result.next,
+      select: (result) => result.pages.flatMap((page) => page.data),
+    });
   },
 };
