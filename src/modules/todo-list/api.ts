@@ -1,3 +1,5 @@
+import { infiniteQueryOptions, queryOptions } from "@tanstack/react-query";
+
 const BASE_URL = "http://localhost:3000";
 
 export type PaginatedResult<T> = {
@@ -23,5 +25,24 @@ export const TodoListApi = {
     return fetch(`${BASE_URL}/tasks?_page=${page}&_per_page=4`, {
       signal,
     }).then((res) => res.json() as Promise<PaginatedResult<TodoDto>>);
+  },
+
+  getTodoListQueryOptions: ({ page }: { page: number }) => {
+    return queryOptions({
+      queryKey: ["tasks, list", { page }],
+      queryFn: (meta) => TodoListApi.getTodoList({ page }, meta),
+    });
+  },
+
+  getTodoListInfinityQueryOptions: () => {
+    return infiniteQueryOptions({
+      queryKey: ["tasks, list"],
+      queryFn: (meta) =>
+        TodoListApi.getTodoList({ page: meta.pageParam }, meta),
+
+      initialPageParam: 1,
+      getNextPageParam: (result) => result.next,
+      select: (result) => result.pages.flatMap((page) => page.data),
+    });
   },
 };

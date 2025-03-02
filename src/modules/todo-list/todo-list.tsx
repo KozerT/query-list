@@ -14,12 +14,8 @@ export const TodoList = () => {
     hasNextPage,
     isFetching,
   } = useInfiniteQuery({
-    queryKey: ["tasks, list"],
-    queryFn: (meta) => TodoListApi.getTodoList({ page: meta.pageParam }, meta),
+    ...TodoListApi.getTodoListInfinityQueryOptions(),
     enabled: enabled,
-    initialPageParam: 1,
-    getNextPageParam: (result) => result.next,
-    select: (result) => result.pages.flatMap((page) => page.data),
   });
 
   const cursorRef = useIntersection(() => {
