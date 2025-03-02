@@ -44,6 +44,107 @@
       "id": "task-9",
       "text": "Call mom to wish her happy birthday",
       "done": false
+    },
+    {
+      "id": "task-10",
+      "text": "Schedule a haircut appointment",
+      "done": false
+    },
+    {
+      "id": "task-11",
+      "text": "Prepare presentation for the client",
+      "done": false
+    },
+    {
+      "id": "task-12",
+      "text": "Organize the files in the office",
+      "done": true
+    },
+    {
+      "id": "task-13",
+      "text": "Buy a gift for the anniversary",
+      "done": false
+    },
+    {
+      "id": "task-14",
+      "text": "Water the plants in the garden",
+      "done": true
+    },
+    {
+      "id": "task-15",
+      "text": "Plan the weekend trip with friends",
+      "done": false
+    },
+    {
+      "id": "task-16",
+      "text": "Read a chapter of the new book",
+      "done": false
+    },
+    {
+      "id": "task-17",
+      "text": "Exercise for at least 30 minutes",
+      "done": true
+    },
+    {
+      "id": "task-18",
+      "text": "Learn a new recipe for dinner",
+      "done": false
+    },
+    {
+      "id": "task-19",
+      "text": "Update the software on the laptop",
+      "done": true
+    },
+    {
+      "id": "task-20",
+      "text": "Write a thank you note to a friend",
+      "done": false
+    },
+    {
+      "id": "task-21",
+      "text": "Backup important files to external drive",
+      "done": true
+    },
+    {
+      "id": "task-22",
+      "text": "Check the car's tire pressure",
+      "done": false
+    },
+    {
+      "id": "task-23",
+      "text": "Reply to emails in the inbox",
+      "done": true
+    },
+    {
+      "id": "task-24",
+      "text": "Set up a budget for next month",
+      "done": false
+    },
+    {
+      "id": "task-25",
+      "text": "Donate old clothes to charity",
+      "done": true
+    },
+    { "id": "task-26", "text": "Install new security system", "done": false },
+    {
+      "id": "task-27",
+      "text": "Take the car for service",
+      "done": false
+    },
+    {
+      "id": "task-28",
+      "text": "Buy new shoes",
+      "done": false
+    },
+    {
+      "id": "task-29",
+      "text": "Go to the gym",
+      "done": false
+    },
+    {
+      "id": "task-30",
+      "text": "Go to the cinema",
+      "done": false
     }
   ]
 }
