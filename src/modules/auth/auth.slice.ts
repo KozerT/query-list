@@ -3,6 +3,7 @@ import { rootReducer } from "../../shared/api/redux";
 
 type AuthState = {
   userId: string | undefined;
+  loginError?: string;
 };
 
 export const authSlice = createSlice({
@@ -12,15 +13,20 @@ export const authSlice = createSlice({
   } as AuthState,
   selectors: {
     userId: (state) => state.userId,
+    loginError: (state) => state.loginError,
   },
   reducers: {
     addUser(state, action: PayloadAction<{ userId: string }>) {
-      localStorage.setItem("userId", action.payload.userId);
       state.userId = action.payload.userId;
+      state.loginError = undefined;
     },
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    removeUser(state, action: PayloadAction<{ userId: string }>) {
+
+    removeUser(state) {
       state.userId = undefined;
+    },
+
+    setError(state, action: PayloadAction<string | undefined>) {
+      state.loginError = action.payload;
     },
   },
 }).injectInto(rootReducer);

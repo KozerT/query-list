@@ -30,7 +30,13 @@ export const authApi = {
     });
   },
 
-  loginUser: async (login: string, password: string) => {
+  loginUser: async ({
+    login,
+    password,
+  }: {
+    login: string;
+    password: string;
+  }) => {
     const r = await jsonApiInstance<UserDto[]>(
       `/users?login=${login}&password=${password}`,
       { json: false },
