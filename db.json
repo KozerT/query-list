@@ -54,12 +54,6 @@
       "userId": "1"
     },
     {
-      "id": "task-7",
-      "text": "Clean the kitchen after dinner",
-      "done": false,
-      "userId": "1"
-    },
-    {
       "id": "task-8",
       "text": "Walk the dog in the park",
       "done": true,
@@ -122,98 +116,8 @@
     {
       "id": "task-18",
       "text": "Learn a new recipe for dinner",
-      "done": false,
-      "userId": "2"
-    },
-    {
-      "id": "task-19",
-      "text": "Update the software on the laptop",
-      "done": true,
-      "userId": "3"
-    },
-    {
-      "id": "task-20",
-      "text": "Write a thank you note to a friend",
-      "done": false,
-      "userId": "1"
-    },
-    {
-      "id": "task-21",
-      "text": "Backup important files to external drive",
       "done": true,
       "userId": "2"
-    },
-    {
-      "id": "task-22",
-      "text": "Check the car's tire pressure",
-      "done": false,
-      "userId": "3"
-    },
-    {
-      "id": "task-23",
-      "text": "Reply to emails in the inbox",
-      "done": true,
-      "userId": "3"
-    },
-    {
-      "id": "task-24",
-      "text": "Set up a budget for next month",
-      "done": false,
-      "userId": "2"
-    },
-    {
-      "id": "task-25",
-      "text": "Donate old clothes to charity",
-      "done": true,
-      "userId": "1"
-    },
-    {
-      "id": "task-26",
-      "text": "Install new security system",
-      "done": false,
-      "userId": "3"
-    },
-    {
-      "id": "task-27",
-      "text": "Take the car for service",
-      "done": false,
-      "userId": "1"
-    },
-    {
-      "id": "task-28",
-      "text": "Buy new shoes",
-      "done": false,
-      "userId": "2"
-    },
-    {
-      "id": "task-29",
-      "text": "Go to the gym",
-      "done": false,
-      "userId": "2"
-    },
-    {
-      "id": "task-30",
-      "text": "Go to the cinema",
-      "done": false,
-      "userId": "1"
-    },
-    {
-      "id": "oXjrS1jbf-cpfbmg4X3mn",
-      "done": false,
-      "text": "Finish course",
-      "userId": "1"
-    },
-    {
-      "id": "Fhh0H4D9--5cn-ykbYDx6",
-      "done": false,
-      "text": "new",
-      "userId": "1"
-    },
-    {
-      "id": "TNg7Hgw2qq8r_bMZLLdSS",
-      "done": false,
-      "text": "Finish the task",
-      "userId": "1"
     }
   ]
 }

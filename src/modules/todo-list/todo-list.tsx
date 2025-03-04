@@ -1,11 +1,14 @@
 import { useTodoList } from "./use-todo-list";
 import { useCreateTodo } from "./use-create-todo";
+import { useDeleteTodo } from "./use-delete-todo";
+import { useToggleTodo } from "./use-toggle-todo";
 
 export const TodoList = () => {
-  const { error, isLoading, toDoItems, isFetching } = useTodoList();
+  const { error, toDoItems, isFetching } = useTodoList();
   const createToDo = useCreateTodo();
+  const deleteTodo = useDeleteTodo();
+  const toggleTodo = useToggleTodo();
 
-  if (isLoading) return <div>Loading...</div>;
   if (error) return <div>{JSON.stringify(error)}</div>;
 
   return (
@@ -21,9 +24,9 @@ export const TodoList = () => {
           id="text"
           placeholder="Enter text"
           className="border border-slate-400 rounded p-3"
-        ></input>
+        />
         <button
-          className="border border-slate-400 rounded p-3 disabled:opacity-40"
+          className="border border-slate-400 rounded  disabled:opacity-40"
           disabled={createToDo.isPending}
         >
           Create
@@ -36,11 +39,21 @@ export const TodoList = () => {
         }
       >
         {toDoItems?.map((todo) => (
-          <div
-            key={todo.id}
-            className="border border-slate-400 rounded p-3 md:w-1/2 sm:w-full text-center"
-          >
-            {todo.text}
+          <div className="border border-slate-400 rounded p-3 md:w-1/2 sm:w-full text-center disabled:opacity-40 disabled:cursor-not-allowed flex justify-between  items-center h-full">
+            <input
+              type="checkbox"
+              checked={todo.done}
+              onChange={() => toggleTodo.toggleTodo(todo.id, todo.done)}
+              className="size-4  cursor-pointer"
+            />
+            <span className="text-lg p-2 md:p-0">{todo.text}</span>
+            <button
+              disabled={deleteTodo.getIsPending(todo.id)}
+              className="text-2xl cursor-pointer self-start"
+              onClick={() => deleteTodo.handleDelete(todo.id)}
+            >
+              x
+            </button>
           </div>
         ))}
       </div>

@@ -4,14 +4,12 @@ import { todoListApi } from "./api";
 import { nanoid } from "nanoid";
 
 export const useCreateTodo = () => {
-  const QueryClient = useQueryClient();
+  const queryClient = useQueryClient();
 
   const createTodoMutation = useMutation({
     mutationFn: todoListApi.createTodo,
     async onSettled() {
-      await QueryClient.invalidateQueries(
-        todoListApi.getTodoListQueryOptions(),
-      );
+      await queryClient.invalidateQueries({ queryKey: [todoListApi.basekey] });
     },
   });
 
