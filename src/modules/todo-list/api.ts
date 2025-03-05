@@ -15,19 +15,19 @@ export type TodoDto = {
   id: string;
   text: string;
   done: boolean;
+  userId: string;
 };
 
 export const todoListApi = {
-  getTodoListQueryOptions: ({ page }: { page: number }) => {
+  basekey: "tasks",
+  getTodoListQueryOptions: () => {
     return queryOptions({
-      queryKey: ["tasks, list", { page }],
+      queryKey: [todoListApi.basekey, "list"],
       queryFn: (meta) =>
-        jsonApiInstance<PaginatedResult<TodoDto>>(
-          `/tasks?_page=${page}&_per_page=4`,
-          {
-            signal: meta.signal,
-          },
-        ),
+        jsonApiInstance<TodoDto[]>(`/tasks`, {
+          signal: meta.signal,
+          json: false,
+        }),
     });
   },
 
@@ -39,11 +39,33 @@ export const todoListApi = {
           `/tasks?_page=${meta.pageParam}&_per_page=4`,
           {
             signal: meta.signal,
+            json: false,
           },
         ),
       initialPageParam: 1,
       getNextPageParam: (result) => result.next,
       select: (result) => result.pages.flatMap((page) => page.data),
+    });
+  },
+
+  createTodo: (data: TodoDto) => {
+    return jsonApiInstance<TodoDto>("/tasks", {
+      method: "POST",
+      json: data,
+    });
+  },
+
+  updateTodo: (data: Partial<TodoDto> & { id: string }) => {
+    return jsonApiInstance<TodoDto>(`/tasks/${data.id}`, {
+      method: "PATCH",
+      json: data,
+    });
+  },
+
+  deleteTodo: (id: string) => {
+    return jsonApiInstance(`/tasks/${id}`, {
+      method: "DELETE",
+      json: false,
     });
   },
 };

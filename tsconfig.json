@@ -1,5 +1,9 @@
 {
   "files": [],
+  "compilerOptions": {
+    "target": "es2023",
+    "lib": ["dom", "es2023"]
+  },
   "references": [
     { "path": "./tsconfig.app.json" },
     { "path": "./tsconfig.node.json" }

@@ -1,150 +1,99 @@
 {
+  "users": [
+    {
+      "id": "1",
+      "login": "annet",
+      "password": "secure232"
+    },
+    {
+      "id": "2",
+      "login": "john",
+      "password": "password123"
+    },
+    {
+      "id": "3",
+      "login": "peter",
+      "password": "password1234"
+    }
+  ],
   "tasks": [
     {
       "id": "task-1",
       "text": "Grocery shopping for the week",
-      "done": false
+      "done": false,
+      "userId": "2"
     },
     {
       "id": "task-2",
       "text": "Book a doctor appointment for check-up",
-      "done": false
+      "done": false,
+      "userId": "3"
     },
     {
       "id": "task-3",
       "text": "Pay the monthly electricity bill",
-      "done": false
+      "done": false,
+      "userId": "1"
     },
     {
       "id": "task-4",
       "text": "Submit the project report to manager",
-      "done": true
+      "done": true,
+      "userId": "2"
     },
     {
       "id": "task-5",
       "text": "Review the code changes from the team",
-      "done": true
+      "done": true,
+      "userId": "3"
     },
     {
       "id": "task-6",
       "text": "Attend the weekly team meeting",
-      "done": true
-    },
-    {
-      "id": "task-7",
-      "text": "Clean the kitchen after dinner",
-      "done": false
+      "done": true,
+      "userId": "1"
     },
     {
       "id": "task-8",
       "text": "Walk the dog in the park",
-      "done": true
+      "done": true,
+      "userId": "2"
     },
     {
       "id": "task-9",
       "text": "Call mom to wish her happy birthday",
-      "done": false
+      "done": false,
+      "userId": "3"
     },
     {
       "id": "task-10",
       "text": "Schedule a haircut appointment",
-      "done": false
+      "done": false,
+      "userId": "2"
     },
     {
       "id": "task-11",
       "text": "Prepare presentation for the client",
-      "done": false
+      "done": false,
+      "userId": "3"
     },
     {
       "id": "task-12",
       "text": "Organize the files in the office",
-      "done": true
+      "done": true,
+      "userId": "1"
     },
     {
       "id": "task-13",
       "text": "Buy a gift for the anniversary",
-      "done": false
+      "done": false,
+      "userId": "1"
     },
     {
-      "id": "task-14",
-      "text": "Water the plants in the garden",
-      "done": true
-    },
-    {
-      "id": "task-15",
-      "text": "Plan the weekend trip with friends",
-      "done": false
-    },
-    {
-      "id": "task-16",
-      "text": "Read a chapter of the new book",
-      "done": false
-    },
-    {
-      "id": "task-17",
-      "text": "Exercise for at least 30 minutes",
-      "done": true
-    },
-    {
-      "id": "task-18",
-      "text": "Learn a new recipe for dinner",
-      "done": false
-    },
-    {
-      "id": "task-19",
-      "text": "Update the software on the laptop",
-      "done": true
-    },
-    {
-      "id": "task-20",
-      "text": "Write a thank you note to a friend",
-      "done": false
-    },
-    {
-      "id": "task-21",
-      "text": "Backup important files to external drive",
-      "done": true
-    },
-    {
-      "id": "task-22",
-      "text": "Check the car's tire pressure",
-      "done": false
-    },
-    {
-      "id": "task-23",
-      "text": "Reply to emails in the inbox",
-      "done": true
-    },
-    {
-      "id": "task-24",
-      "text": "Set up a budget for next month",
-      "done": false
-    },
-    {
-      "id": "task-25",
-      "text": "Donate old clothes to charity",
-      "done": true
-    },
-    { "id": "task-26", "text": "Install new security system", "done": false },
-    {
-      "id": "task-27",
-      "text": "Take the car for service",
-      "done": false
-    },
-    {
-      "id": "task-28",
-      "text": "Buy new shoes",
-      "done": false
-    },
-    {
-      "id": "task-29",
-      "text": "Go to the gym",
-      "done": false
-    },
-    {
-      "id": "task-30",
-      "text": "Go to the cinema",
-      "done": false
+      "id": "5nIeP4LK1m0zjQH8Nd3f2",
+      "done": false,
+      "text": " new. Owner: annet",
+      "userId": "1"
     }
   ]
 }
