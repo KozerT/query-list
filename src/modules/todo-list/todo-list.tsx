@@ -28,7 +28,7 @@ export const TodoList = () => {
           placeholder="Enter text"
           className="border border-slate-400 rounded p-3"
         />
-        <button className="border border-slate-400 rounded  disabled:opacity-40">
+        <button className="border border-slate-400 rounded  disabled:opacity-40 p-3">
           Create
         </button>
       </form>
