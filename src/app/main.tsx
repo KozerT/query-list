@@ -8,6 +8,9 @@ import { Provider } from "react-redux";
 import { store } from "../shared/api/redux";
 import "./index.css";
 import { App } from "./app";
+import { onlineManager } from "@tanstack/react-query";
+
+onlineManager.setOnline(navigator.onLine);
 
 const persister = createSyncStoragePersister({
   storage: window.localStorage,
