@@ -27,6 +27,9 @@ export const todoListApi = {
         jsonApiInstance<TodoDto[]>(`/tasks`, {
           signal: meta.signal,
           json: false,
+        }).then((error) => {
+          throw new Error("suspense");
+          console.error(error);
         }),
     });
   },

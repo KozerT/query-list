@@ -9,6 +9,7 @@ import { store } from "../shared/api/redux";
 import "./index.css";
 import { App } from "./app";
 import { onlineManager } from "@tanstack/react-query";
+import { Loader } from "./loader";
 
 onlineManager.setOnline(navigator.onLine);
 
@@ -29,7 +30,9 @@ createRoot(document.getElementById("root") as HTMLElement).render(
       }}
     >
       <Provider store={store}>
-        <App />
+        <Loader>
+          <App />
+        </Loader>
       </Provider>
       <ReactQueryDevtools initialIsOpen={false} />
     </PersistQueryClientProvider>

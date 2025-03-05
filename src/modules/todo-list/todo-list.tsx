@@ -1,23 +1,21 @@
 import { useTodoList } from "./use-todo-list";
 import { useDeleteTodo } from "./use-delete-todo";
 import { useToggleTodo } from "./use-toggle-todo";
-import { useUser } from "../auth/use-user";
+import { useSuspenseUser } from "../auth/use-user";
 import { useCreateTodo } from "./use-create-todo";
 
 export const TodoList = () => {
-  const { error, toDoItems, isFetching, isLoading } = useTodoList();
-  const userQuery = useUser();
+  const { toDoItems } = useTodoList();
+  const { data: user } = useSuspenseUser();
 
   const createToDo = useCreateTodo();
   const deleteTodo = useDeleteTodo();
   const { toggleTodo } = useToggleTodo();
 
-  if (error) return <div>{JSON.stringify(error)}</div>;
-
   return (
     <div className="p-5 mx-auto max-w-[1200px] mt-10">
       <h1 className="text-3xl font-bold underline text-center">
-        Todo List {userQuery.data?.login}
+        Todo List {user.login}
       </h1>
       <form
         onSubmit={createToDo.handleCreate}
@@ -30,19 +28,11 @@ export const TodoList = () => {
           placeholder="Enter text"
           className="border border-slate-400 rounded p-3"
         />
-        <button
-          className="border border-slate-400 rounded  disabled:opacity-40"
-          disabled={isLoading}
-        >
+        <button className="border border-slate-400 rounded  disabled:opacity-40">
           Create
         </button>
       </form>
-      <div
-        className={
-          "flex flex-col gap-4 justify-center items-center my-10" +
-          (isFetching ? " opacity-45" : "")
-        }
-      >
+      <div className={"flex flex-col gap-4 justify-center items-center my-10"}>
         {toDoItems?.map((todo) => (
           <div
             className="border border-slate-400 rounded p-3 md:w-1/2 sm:w-full text-center disabled:opacity-40 disabled:cursor-not-allowed flex justify-between  items-center h-full"
