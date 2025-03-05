@@ -1,15 +1,16 @@
 import { useTodoList } from "./use-todo-list";
-import { useCreateTodo } from "./use-create-todo";
 import { useDeleteTodo } from "./use-delete-todo";
 import { useToggleTodo } from "./use-toggle-todo";
 import { useUser } from "../auth/use-user";
+import { useCreateTodo } from "./use-create-todo";
 
 export const TodoList = () => {
-  const { error, toDoItems, isFetching } = useTodoList();
+  const { error, toDoItems, isFetching, isLoading } = useTodoList();
   const userQuery = useUser();
+
   const createToDo = useCreateTodo();
   const deleteTodo = useDeleteTodo();
-  const toggleTodo = useToggleTodo();
+  const { toggleTodo } = useToggleTodo();
 
   if (error) return <div>{JSON.stringify(error)}</div>;
 
@@ -31,7 +32,7 @@ export const TodoList = () => {
         />
         <button
           className="border border-slate-400 rounded  disabled:opacity-40"
-          disabled={createToDo.isPending}
+          disabled={isLoading}
         >
           Create
         </button>
@@ -43,11 +44,14 @@ export const TodoList = () => {
         }
       >
         {toDoItems?.map((todo) => (
-          <div className="border border-slate-400 rounded p-3 md:w-1/2 sm:w-full text-center disabled:opacity-40 disabled:cursor-not-allowed flex justify-between  items-center h-full">
+          <div
+            className="border border-slate-400 rounded p-3 md:w-1/2 sm:w-full text-center disabled:opacity-40 disabled:cursor-not-allowed flex justify-between  items-center h-full"
+            key={todo.id}
+          >
             <input
               type="checkbox"
               checked={todo.done}
-              onChange={() => toggleTodo.toggleTodo(todo.id, todo.done)}
+              onChange={() => toggleTodo(todo.id, todo.done)}
               className="size-4  cursor-pointer"
             />
             <span className="text-lg p-2 md:p-0">{todo.text}</span>
