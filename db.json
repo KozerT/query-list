@@ -103,7 +103,7 @@
     },
     {
       "id": "QU1aTpyLFZlEO57-qY8kA",
-      "done": false,
+      "done": true,
       "text": " test11. Owner: annet",
       "userId": "1"
     },
@@ -121,14 +121,8 @@
     },
     {
       "id": "2nqNgCpWPWuZRiS2WWjxJ",
-      "done": false,
+      "done": true,
       "text": " new task. Owner: annet",
-      "userId": "1"
-    },
-    {
-      "id": "pVEssl6HnJPuoEvXYSVwc",
-      "done": false,
-      "text": " New task. Owner: annet",
       "userId": "1"
     }
   ]

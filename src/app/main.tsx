@@ -10,8 +10,7 @@ import "./index.css";
 import { App } from "./app";
 import { onlineManager } from "@tanstack/react-query";
 import { Loader } from "./loader";
-import { authSlice } from "../modules/auth/auth.slice";
-import { authApi } from "../modules/auth/api";
+import { prefetchAuth } from "../modules/auth/prefetch";
 
 onlineManager.setOnline(navigator.onLine);
 
@@ -19,10 +18,7 @@ const persister = createSyncStoragePersister({
   storage: window.localStorage,
 });
 
-const userId = authSlice.selectors.userId(store.getState());
-if (userId) {
-  queryClient.prefetchQuery(authApi.getUserById(userId));
-}
+prefetchAuth();
 
 createRoot(document.getElementById("root") as HTMLElement).render(
   <StrictMode>
