@@ -1,9 +1,11 @@
 "use server";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { todoListApi } from "./api";
+import { useSuspenseUser } from "../auth/use-user";
 
 export const useDeleteTodo = () => {
   const queryClient = useQueryClient();
+  const user = useSuspenseUser();
 
   const deleteTodoMutation = useMutation({
     mutationFn: todoListApi.deleteTodo,
@@ -14,7 +16,7 @@ export const useDeleteTodo = () => {
     //Pessimistic updates (modifying cache right after mutation passes)
     async onSuccess(_, deletedId) {
       queryClient.setQueryData(
-        todoListApi.getTodoListQueryOptions().queryKey,
+        todoListApi.getTodoListQueryOptions({ userId: user.data.id }).queryKey,
         (todos) => todos?.filter((todo) => todo.id !== deletedId),
       );
     },

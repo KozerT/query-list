@@ -1,23 +1,16 @@
-import { useQuery } from "@tanstack/react-query";
+import { useSuspenseQuery } from "@tanstack/react-query";
 import { todoListApi } from "./api";
+import { useSuspenseUser } from "../auth/use-user";
 
 export const useTodoList = () => {
-  const {
-    data: toDoItems,
-    error,
-    isLoading,
-    isFetching,
-    refetch,
-  } = useQuery({
-    ...todoListApi.getTodoListQueryOptions(),
+  const user = useSuspenseUser();
+  const { data: toDoItems, refetch } = useSuspenseQuery({
+    ...todoListApi.getTodoListQueryOptions({ userId: user.data.id }),
     select: (data) => (data ? data.toReversed() : undefined),
   });
 
   return {
     toDoItems,
-    error,
-    isLoading,
-    isFetching,
     refetch,
   };
 };

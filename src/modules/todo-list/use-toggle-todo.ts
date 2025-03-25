@@ -1,9 +1,11 @@
 "use server";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { todoListApi } from "./api";
+import { useSuspenseUser } from "../auth/use-user";
 
 export const useToggleTodo = () => {
   const queryClient = useQueryClient();
+  const user = useSuspenseUser();
 
   const updateTodoMutation = useMutation({
     mutationFn: todoListApi.updateTodo,
@@ -15,12 +17,12 @@ export const useToggleTodo = () => {
 
       // Snapshot the previous value
       const previousTodos = queryClient.getQueryData(
-        todoListApi.getTodoListQueryOptions().queryKey,
+        todoListApi.getTodoListQueryOptions({ userId: user.data.id }).queryKey,
       );
 
       // Optimistically update to the new value
       queryClient.setQueryData(
-        todoListApi.getTodoListQueryOptions().queryKey,
+        todoListApi.getTodoListQueryOptions({ userId: user.data.id }).queryKey,
         (old) =>
           old?.map((todo) =>
             todo.id === newTodo.id ? { ...todo, ...newTodo } : todo,

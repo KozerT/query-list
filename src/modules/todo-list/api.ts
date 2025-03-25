@@ -20,11 +20,11 @@ export type TodoDto = {
 
 export const todoListApi = {
   basekey: "tasks",
-  getTodoListQueryOptions: () => {
+  getTodoListQueryOptions: ({ userId }: { userId: string }) => {
     return queryOptions({
-      queryKey: [todoListApi.basekey, "list"],
+      queryKey: [todoListApi.basekey, "list", userId],
       queryFn: (meta) =>
-        jsonApiInstance<TodoDto[]>(`/tasks`, {
+        jsonApiInstance<TodoDto[]>(`/tasks?userId=${userId}`, {
           signal: meta.signal,
           json: false,
         }),
